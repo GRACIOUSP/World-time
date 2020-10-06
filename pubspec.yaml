@@ -26,6 +26,11 @@ dependencies:
   http: ^0.12.2
   intl: ^0.16.1
   flutter_spinkit: ^4.1.2+1
+  loader: ^0.4.0
+  # package to show loading dailog
+  load: ^0.1.6
+  #for alert, https://pub.dev/packages/rflutter_alert
+  rflutter_alert: ^1.1.0
 
 
   # The following adds the Cupertino Icons font to your application.

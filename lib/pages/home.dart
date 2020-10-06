@@ -14,8 +14,8 @@ class _HomeState extends State<Home> {
     print(data);
 
     //set background
-    String bgImage = data['isDaytime'] ? 'day.png' : 'night.png';
-    Color bgColor = data['isDaytime'] ? Colors.blue : Colors.indigo[700];
+    String bgImage = data['isDaytime'] ? 'day3.png' : 'night2.png';
+    Color bgColor = data['isDaytime'] ? Colors.blue[800] : Colors.blueGrey[900];
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -30,28 +30,42 @@ class _HomeState extends State<Home> {
             child: Column(
               children: [
                 FlatButton.icon(
+      
                   onPressed: () async {
-                    dynamic result = await Navigator.pushNamed(context, '/location');
+                    dynamic result =
+                        await Navigator.pushNamed(context, '/location');
                     setState(() {
                       data = {
                         'time': result['time'],
                         'location': result['location'],
                         'isDaytime': result['isDaytime'],
                         'flag': result['flag'],
-        
+                        'ip': result['ip'],
                       };
                     });
                   },
-                  icon: Icon(Icons.edit_location, color: Colors.grey[300]),
+                  
+                  color: Colors.grey[800],
+
+                  icon: Icon(
+                    Icons.edit_location, 
+                    color: Colors.grey[300]
+                  ),
                   label: Text(
                     'Edit Location',
                     style: TextStyle(color: Colors.grey[300]),
                   ),
+                
                 ),
                 SizedBox(height: 20.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage('images/${data['flag']}'),
+                      radius: 16.0,
+                    ),
+                    SizedBox(width: 10.0),
                     Text(
                       data['location'],
                       style: TextStyle(
@@ -61,11 +75,38 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
+                
                 SizedBox(height: 20.0),
                 Text(
                   data['time'],
                   style: TextStyle(fontSize: 66.0, color: Colors.white),
                 ),
+
+                SizedBox(height: 20.0),
+                  
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'My IP:',
+                      style: TextStyle(
+                        fontSize: 28.0,
+                        letterSpacing: 1.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    SizedBox(width: 10.0),
+                    Text(
+                      data['ip'],
+                      style: TextStyle(
+                          fontSize: 28.0,
+                          letterSpacing: 1.0,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                  
               ],
             ),
           ),
